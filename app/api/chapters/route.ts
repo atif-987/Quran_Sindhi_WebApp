@@ -1,9 +1,16 @@
 import { NextResponse } from 'next/server';
 
+interface Surah {
+  number: number;
+  name: string;
+  englishName: string;
+  numberOfAyahs: number;
+}
+
 export async function GET() {
   try {
     const res = await fetch('http://api.alquran.cloud/v1/quran/en.asad', {
-      cache: 'no-store', // ⛔ Prevent Next.js from trying to cache large response
+      cache: 'no-store',
     });
 
     const json = await res.json();
@@ -12,7 +19,7 @@ export async function GET() {
       throw new Error('Failed to fetch data');
     }
 
-    const surahs = json.data.surahs.map((surah: any) => ({
+    const surahs = json.data.surahs.map((surah: Surah) => ({
       chapter: surah.number,
       name: surah.name,
       englishName: surah.englishName,
@@ -21,6 +28,7 @@ export async function GET() {
 
     return NextResponse.json(surahs);
   } catch (error) {
+    console.error(error); // optional
     return NextResponse.json({ error: 'Failed to fetch Surah list' }, { status: 500 });
   }
 }
