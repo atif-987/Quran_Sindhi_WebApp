@@ -26,4 +26,5 @@ export async function GET(_req: NextRequest, context: { params: { id: string } }
   } catch (err) {
     return NextResponse.json({ error: 'Not Found' }, { status: 404 });
   }
+  
 }
