@@ -4,7 +4,7 @@ interface Surah {
   number: number;
   name: string;
   englishName: string;
-  ayahs: Array<any>;
+  ayahs: unknown[];
 }
 
 export async function GET() {
