@@ -6,14 +6,9 @@ type Chapter = {
   chapter: number;
   englishName: string;
   name: string;
-  ayahs: number;
+  ayahCount: number;
 };
 
-const editions = [
-  { value: 'en.asad', label: 'English (Asad)' },
-  { value: 'ur.jalandhry', label: 'Urdu (Jalandhry)' },
-  { value: 'sd-ghulamrasoolmehar', label: 'Sindhi (Ghulam Rasool Mehar)' },
-];
 
 export default function Home() {
   const [selectedEdition, setSelectedEdition] = useState('sd-ghulamrasoolmehar');
@@ -74,7 +69,7 @@ export default function Home() {
         </div>
 
         {/* Controls */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <input
             type="text"
             placeholder="Search Surah..."
@@ -82,20 +77,7 @@ export default function Home() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <label className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3 py-2 shadow-sm">
-            <span className="font-medium text-gray-700">Edition:</span>
-            <select
-              value={selectedEdition}
-              onChange={(e) => setSelectedEdition(e.target.value)}
-              className="ml-2 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none bg-gray-50 text-gray-700"
-            >
-              {editions.map((ed) => (
-                <option key={ed.value} value={ed.value}>
-                  {ed.label}
-                </option>
-              ))}
-            </select>
-          </label>
+
         </div>
 
         {/* Last Read */}
@@ -130,7 +112,7 @@ export default function Home() {
                     {s.englishName}
                   </span>
                 </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-300">Verses: {s.ayahs}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">Verses: {s.ayahCount}</p>
               </Link>
             ))}
           </div>

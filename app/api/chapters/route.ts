@@ -4,7 +4,7 @@ interface Surah {
   number: number;
   name: string;
   englishName: string;
-  numberOfAyahs: number;
+  ayahs: Array<any>;
 }
 
 export async function GET() {
@@ -18,13 +18,14 @@ export async function GET() {
     if (!res.ok || !json.data) {
       throw new Error('Failed to fetch data');
     }
-
-    const surahs = json.data.surahs.map((surah: Surah) => ({
+    console.log("First surah object:", json.data.surahs[0]);  
+      const surahs = json.data.surahs.map((surah: Surah) => ({
       chapter: surah.number,
       name: surah.name,
       englishName: surah.englishName,
-      ayahCount: surah.numberOfAyahs,
+      ayahCount: surah.ayahs.length,
     }));
+    console.log("surahs", surahs);  
 
     return NextResponse.json(surahs);
   } catch (error) {
