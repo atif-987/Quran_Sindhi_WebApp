@@ -24,7 +24,6 @@ export default function Home() {
         if (res.ok) {
           setChapters(data.chapters || data);
         } else {
-          console.error('Error fetching:', data);
           setChapters([]);
         }
       } catch (err) {
