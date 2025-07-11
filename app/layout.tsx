@@ -10,7 +10,7 @@ export default function RootLayout({
       <body className="bg-gradient-to-br from-blue-50 to-white min-h-screen flex flex-col">
         <header className="w-full bg-white/80 backdrop-blur border-b border-gray-200 shadow-sm py-4 px-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-2xl font-bold text-blue-700">📖 Quranic WebApp</span>
+            <span className="text-2xl font-bold text-blue-700">قرآن سنڌي ترجمو</span>
           </div>
           <span className="text-sm text-gray-500 font-mono">Powered by Next.js & Tailwind CSS</span>
         </header>
@@ -18,7 +18,7 @@ export default function RootLayout({
           {children}
         </main>
         <footer className="w-full bg-white/80 backdrop-blur border-t border-gray-200 py-3 text-center text-gray-500 text-sm mt-8">
-          &copy; {new Date().toDateString()} Quranic WebApp. All rights reserved.
+          &copy; {new Date().toDateString()} Quranic Sindhi Tarjumo. All rights reserved.
         </footer>
       </body>
     </html>
