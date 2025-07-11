@@ -24,7 +24,7 @@ export async function GET(_req: NextRequest, context: { params: { id: string } }
 
     return NextResponse.json({ data: surahData });
   } catch (err) {
-    return NextResponse.json({ error: 'Not Found' }, { status: 404 });
+    return NextResponse.json({ error: err }, { status: 404 });
   }
-  
+
 }
