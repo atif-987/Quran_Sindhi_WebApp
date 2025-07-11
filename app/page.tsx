@@ -37,7 +37,7 @@ export default function Home() {
 
     fetchChapters();
     setLastRead(Number(localStorage.getItem('lastReadSurah')) || null);
-  });
+  },[]);
 
   const filteredChapters = chapters.filter((s) =>
     s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
