@@ -62,15 +62,17 @@ export default async function SurahPage({
         {data.data.ayahs.map((ayah) => (
           <div
             key={ayah.numberInSurah}
-            className="border border-gray-200 rounded-xl shadow bg-white p-6 mb-4 hover:shadow-lg transition"
+            className="card"
           >
             <p className="arabic-text font-semibold mb-2">
               {ayah.text}
             </p>
-            <p className="mt-2 text-base text-blue-700 flex items-center gap-2">
-              <span role="img" aria-label="book">📘</span>
-              {ayah.translation || ''}
-            </p>
+            {ayah.translation && (
+              <>
+                <div className="translation-label">Sindhi Translation</div>
+                <p className="sindhi-text">{ayah.translation}</p>
+              </>
+            )}
           </div>
         ))}
       </div>

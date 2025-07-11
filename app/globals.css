@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -35,6 +35,48 @@ body {
 }
 .arabic-text:hover, .arabic-text:focus {
   background: #f0f4ff;
+}
+
+.sindhi-text {
+  font-family: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
+  direction: rtl;
+  text-align: right;
+  font-size: 1.35rem;
+  line-height: 2.2rem;
+  color: #1b4d3e;
+  background: #f9f9f6;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  box-shadow: 0 1px 4px rgba(27,77,62,0.04);
+  letter-spacing: 0.01em;
+  word-spacing: 0.1em;
+  transition: background 0.2s;
+}
+.sindhi-text:hover, .sindhi-text:focus {
+  background: #e6f7ee;
+}
+
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 1.25rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  border-color: #c7d2fe;
+}
+
+.translation-label {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-bottom: 0.2rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 @layer utilities {

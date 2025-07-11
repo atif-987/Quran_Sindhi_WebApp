@@ -58,10 +58,10 @@ export default function Home() {
 
         {/* Header */}
         <div className="text-center space-y-2">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-800 dark:text-yellow-400 tracking-tight">
-            📖 Quran Chapters
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-800 dark:text-yellow-400 tracking-tight mb-2">
+            <span className="inline-block align-middle mr-2">📖</span> Quran Chapters
           </h1>
-          <p className="text-lg text-gray-700 dark:text-gray-300">
+          <p className="text-lg text-gray-700 dark:text-gray-300 font-medium mb-2">
             Explore the 114 Surahs of the Holy Quran
           </p>
         </div>
@@ -102,11 +102,11 @@ export default function Home() {
                 key={s.chapter}
                 href={`/${s.chapter}`}
                 onClick={() => localStorage.setItem('lastReadSurah', s.chapter.toString())}
-                className="block bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow hover:shadow-lg hover:border-blue-500 dark:hover:border-yellow-400 transition-all duration-200 group"
+                className="block card hover:shadow-xl hover:border-blue-500 dark:hover:border-yellow-400 transition-all duration-200 group"
               >
-                <h2 className="text-2xl font-bold text-blue-700 dark:text-yellow-300 mb-2 group-hover:text-blue-900 dark:group-hover:text-yellow-100 transition">
-                  {s.name}
-                  <span className="block text-base text-gray-500 dark:text-gray-400 font-normal">
+                <h2 className="text-2xl font-bold text-blue-700 dark:text-yellow-300 mb-2 group-hover:text-blue-900 dark:group-hover:text-yellow-100 transition flex flex-col gap-1">
+                  <span className="arabic-text text-3xl leading-snug">{s.name}</span>
+                  <span className="block text-base text-gray-500 dark:text-gray-400 font-normal font-sans">
                     {s.englishName}
                   </span>
                 </h2>
