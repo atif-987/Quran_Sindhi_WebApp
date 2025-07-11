@@ -61,9 +61,7 @@ export default function Home() {
           <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-800 dark:text-yellow-400 tracking-tight mb-2 sindhi-text">
             <span className="inline-block align-middle mr-2"></span> قرآن سنڌي ترجمو
           </h1>
-          <p className="text-lg text-gray-700 dark:text-gray-300 font-medium mb-2">
-            Explore the 114 Surahs of the Holy Quran
-          </p>
+
         </div>
 
         {/* Controls */}
