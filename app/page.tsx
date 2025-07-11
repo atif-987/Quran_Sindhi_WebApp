@@ -11,7 +11,6 @@ type Chapter = {
 
 
 export default function Home() {
-  const [selectedEdition, setSelectedEdition] = useState('sd-ghulamrasoolmehar');
   const [chapters, setChapters] = useState<Chapter[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -38,7 +37,7 @@ export default function Home() {
 
     fetchChapters();
     setLastRead(Number(localStorage.getItem('lastReadSurah')) || null);
-  }, [selectedEdition]);
+  });
 
   const filteredChapters = chapters.filter((s) =>
     s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
