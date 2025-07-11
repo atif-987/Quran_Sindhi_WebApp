@@ -64,7 +64,7 @@ export default async function SurahPage({
             key={ayah.numberInSurah}
             className="border border-gray-200 rounded-xl shadow bg-white p-6 mb-4 hover:shadow-lg transition"
           >
-            <p className="text-right font-semibold text-2xl text-gray-800 mb-2">
+            <p className="arabic-text font-semibold mb-2">
               {ayah.text}
             </p>
             <p className="mt-2 text-base text-blue-700 flex items-center gap-2">
