@@ -22,12 +22,24 @@ export default async function SurahPage({
 }: {
   params: { surah: string };
 }) {
+  debugger
   const { surah } = params;
-
+  console.log("params:", params);
+  console.log("surah param:", surah);
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/surah/${surah}`
-    );
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
+    const res = await fetch(`${baseUrl}/api/surah/${surah}`, { cache: 'no-store' });
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("API error:", res.status, errorText);
+      return (
+        <p className="p-6 text-red-500 text-center text-lg font-semibold">
+          Error: {res.status} - {errorText}
+        </p>
+      );
+    }
+
     const data: SurahApiResponse = await res.json();
 
     if ('error' in data) {
@@ -63,7 +75,8 @@ export default async function SurahPage({
         ))}
       </div>
     );
-  } catch {
+  } catch (e) {
+    console.error("Fetch failed:", e);
     return (
       <p className="p-6 text-red-500 text-center text-lg font-semibold">
         Failed to fetch surah data.
