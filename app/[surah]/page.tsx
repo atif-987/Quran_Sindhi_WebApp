@@ -68,8 +68,8 @@ export default async function SurahPage({
             </p>
             {ayah.translation && (
               <>
-                <div className="translation-label dark:text-gray-400">Sindhi Translation</div>
-                <p className="sindhi-text dark:text-green-200 dark:bg-gray-900">{ayah.translation}</p>
+              <br/>
+                <p className="sindhi-text text-xl dark:text-green-200 dark:bg-gray-900">{ayah.translation}</p>
               </>
             )}
           </div>
