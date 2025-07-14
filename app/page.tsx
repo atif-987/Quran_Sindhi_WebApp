@@ -27,6 +27,7 @@ export default function Home() {
       } catch (err) {
         console.error('Error:', err);
         setChapters([]);
+        
       } finally {
         setLoading(false);
       }
