@@ -97,7 +97,7 @@ export default function Home() {
 
           {/* Section Title */}
           <h2 className="text-center text-2xl sm:text-3xl font-semibold text-gray-700 dark:text-gray-100 mt-4">
-            سورتون جي فهرست
+          سورتن جي فهرست
           </h2>
 
           {/* Chapters Grid */}
