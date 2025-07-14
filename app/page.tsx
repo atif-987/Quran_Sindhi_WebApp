@@ -27,7 +27,7 @@ export default function Home() {
       } catch (err) {
         console.error('Error:', err);
         setChapters([]);
-        
+
       } finally {
         setLoading(false);
       }
@@ -61,11 +61,10 @@ export default function Home() {
           </div>
 
           {/* Search */}
-          {/* <div className="flex justify-center"> 
+          <div className="flex justify-center"> 
             <div className="relative w-full max-w-md">
               <input
                 type="text"
-                placeholder="Search Surah..."
                 className="w-full pl-10 pr-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white shadow-md"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -74,7 +73,7 @@ export default function Home() {
                 🔍
               </div>
             </div>
-          </div> */}
+          </div>
 
           {/* Last Read */}
           {lastRead && (() => {
