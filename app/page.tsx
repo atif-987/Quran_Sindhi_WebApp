@@ -54,7 +54,7 @@ export default function Home() {
 
           {/* Header */}
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-800 dark:text-yellow-400 tracking-tight sindhi-text">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-800 dark:text-yellow-400 tracking-tight sindhi-text-nobackground">
               قرآن سنڌي ترجمو
             </h1>
           </div>
@@ -86,7 +86,7 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6l4 2m6 2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2z" />
                   </svg>
                 </span>
-                <span className="sindhi-text font-semibold text-base">آخري پڙهيل سورت:</span>
+                <span className="sindhi-text-nobackground font-semibold text-base">آخري پڙهيل سورت:</span>
                 <Link href={`/${lastRead}`} className="arabic-text text-xl font-bold text-blue-700 dark:text-yellow-300 underline ml-2">
                   {lastReadSurah.name}
                 </Link>

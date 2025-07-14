@@ -53,6 +53,19 @@ body {
   word-spacing: 0.1em;
   transition: background 0.2s;
 }
+.sindhi-text-nobackground {
+  font-family: 'Lateef', serif;
+  direction: rtl;
+  text-align: right;
+  font-size: 1.9rem;
+  line-height: 2.2rem;
+  color: #1b4d3e;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  letter-spacing: 0.01em;
+  word-spacing: 0.1em;
+  transition: background 0.2s;
+}
 .sindhi-text:hover, .sindhi-text:focus {
   background: #e6f7ee;
 }
