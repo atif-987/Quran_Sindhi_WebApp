@@ -54,13 +54,13 @@ export default function Home() {
 
           {/* Header */}
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-800 dark:text-yellow-400 tracking-tight sindhi-text-nobackground">
+            <h1 className="text-2xl sm:text-8xl !text-center font-extrabold text-blue-800 dark:text-yellow-400 tracking-tight sindhi-text-nobackground font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-yellow-600 to-orange-500 drop-shadow-[2px_2px_3px_rgba(0,0,0,0.5)] dark:from-yellow-300 dark:via-yellow-500 dark:to-yellow-100">
               قرآن سنڌي ترجمو
             </h1>
           </div>
 
           {/* Search */}
-          <div className="flex justify-center">
+          {/* <div className="flex justify-center"> 
             <div className="relative w-full max-w-md">
               <input
                 type="text"
@@ -73,7 +73,7 @@ export default function Home() {
                 🔍
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Last Read */}
           {lastRead && (() => {
