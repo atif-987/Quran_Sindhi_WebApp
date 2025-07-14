@@ -51,7 +51,7 @@ export default async function SurahPage({
 
     return (
       <div className="max-w-3xl mx-auto p-6 space-y-8 bg-white dark:bg-gray-900 rounded-2xl">
-        <h1 className="text-3xl font-extrabold text-blue-800 dark:text-yellow-400 mb-4 text-center">
+        <h1 className="text-5xl font-extrabold text-blue-800 dark:text-yellow-400 mb-4 text-center">
           {data.data.name}
           <span className="text-lg text-gray-500 dark:text-gray-300 font-normal block">
             {data.data.englishName || data.data.englishNameTranslation || ''}

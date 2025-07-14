@@ -15,11 +15,11 @@ export default function RootLayout({
           </div>
           <DarkModeToggle />
         </header>
-        <main className="flex-1 w-full max-w-6xl mx-auto px-4 py-8">
+        <main className="flex-1 w-full  mx-auto  py-8">
           {children}
         </main>
         <footer className="w-full bg-white/80 backdrop-blur border-t border-gray-200 py-3 text-center text-gray-500 text-sm mt-8">
-          &copy; {new Date().getFullYear()} Quranic Sindhi Tarjumo. All rights reserved.
+          &copy; {new Date().toDateString()} Quranic Sindhi Tarjumo. All rights reserved.
         </footer>
       </body>
     </html>
