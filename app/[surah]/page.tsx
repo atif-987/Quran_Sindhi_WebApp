@@ -24,8 +24,7 @@ export default async function SurahPage({
 }) {
   debugger
   const { surah } = params;
-  console.log("params:", params);
-  console.log("surah param:", surah);
+
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
@@ -51,10 +50,10 @@ export default async function SurahPage({
     }
 
     return (
-      <div className="max-w-3xl mx-auto p-6 space-y-8">
-        <h1 className="text-3xl font-extrabold text-blue-800 mb-4 text-center">
+      <div className="max-w-3xl mx-auto p-6 space-y-8 bg-white dark:bg-gray-900 rounded-2xl">
+        <h1 className="text-3xl font-extrabold text-blue-800 dark:text-yellow-400 mb-4 text-center">
           {data.data.name}
-          <span className="text-lg text-gray-500 font-normal block">
+          <span className="text-lg text-gray-500 dark:text-gray-300 font-normal block">
             {data.data.englishName || data.data.englishNameTranslation || ''}
           </span>
         </h1>
@@ -62,15 +61,15 @@ export default async function SurahPage({
         {data.data.ayahs.map((ayah) => (
           <div
             key={ayah.numberInSurah}
-            className="card"
+            className="card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow hover:shadow-lg transition"
           >
-            <p className="arabic-text font-semibold mb-2">
+            <p className="arabic-text font-semibold mb-2 text-gray-900 dark:text-yellow-100">
               {ayah.text}
             </p>
             {ayah.translation && (
               <>
-                <div className="translation-label">Sindhi Translation</div>
-                <p className="sindhi-text">{ayah.translation}</p>
+                <div className="translation-label dark:text-gray-400">Sindhi Translation</div>
+                <p className="sindhi-text dark:text-green-200 dark:bg-gray-900">{ayah.translation}</p>
               </>
             )}
           </div>

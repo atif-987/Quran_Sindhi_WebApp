@@ -54,7 +54,7 @@ export default function Home() {
         backgroundBlendMode: 'lighten',
       }}
     >
-      <div className="max-w-6xl mx-auto space-y-8 backdrop-blur-sm bg-white/80 dark:bg-black/60 rounded-2xl p-6 shadow-md text-gray-800 dark:text-white">
+      <div className="max-w-6xl mx-auto space-y-8 backdrop-blur-sm bg-white/80 dark:bg-gray-900 rounded-2xl p-6 shadow-md text-gray-800 dark:text-gray-100">
 
         {/* Header */}
         <div className="text-center space-y-2">
@@ -77,20 +77,31 @@ export default function Home() {
         </div>
 
         {/* Last Read */}
-        {lastRead && (
-          <div className="text-center mt-2 text-sm">
-            📌 Last Read: 
-            <Link href={`/${lastRead}`} className="text-blue-600 dark:text-yellow-300 underline ml-1">
-              Surah #{lastRead}
+        {lastRead && (() => {
+          const lastReadSurah = chapters.find(s => s.chapter === lastRead);
+          if (!lastReadSurah) return null;
+          return (
+            <div
+            className="flex items-center gap-3 bg-yellow-100 dark:bg-gray-800 border border-yellow-200 dark:border-gray-700 rounded-xl py-2 px-4 max-w-fit mx-auto shadow-lg mt-2"
+            dir="rtl"
+          >
+            <span className="inline-flex items-center justify-center w-7 h-7 bg-yellow-200 dark:bg-gray-700 rounded-md">
+              <svg xmlns='http://www.w3.org/2000/svg' className='w-5 h-5 text-yellow-700 dark:text-yellow-300' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 6v6l4 2m6 2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2z' /></svg>
+            </span>
+            <span className="sindhi-text font-semibold text-base">آخري پڙهيل سورت:</span>
+            <Link href={`/${lastRead}`} className="arabic-text text-xl font-bold text-blue-700 dark:text-yellow-300 underline ml-2">
+              {lastReadSurah.name}
             </Link>
           </div>
-        )}
+          
+          );
+        })()}
 
         {/* Chapters Grid */}
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-gray-200 dark:bg-gray-700 animate-pulse h-32 rounded-xl"></div>
+              <div key={i} className="bg-gray-200 dark:bg-gray-800 animate-pulse h-32 rounded-xl"></div>
             ))}
           </div>
         ) : filteredChapters.length > 0 ? (
@@ -100,15 +111,15 @@ export default function Home() {
                 key={s.chapter}
                 href={`/${s.chapter}`}
                 onClick={() => localStorage.setItem('lastReadSurah', s.chapter.toString())}
-                className="block card hover:shadow-xl hover:border-blue-500 dark:hover:border-yellow-400 transition-all duration-200 group"
+                className="block card hover:shadow-xl hover:border-blue-500 dark:hover:border-yellow-400 transition-all duration-200 group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
               >
                 <h2 className="text-2xl font-bold text-blue-700 dark:text-yellow-300 mb-2 group-hover:text-blue-900 dark:group-hover:text-yellow-100 transition flex flex-col gap-1">
                   <span className="arabic-text text-3xl leading-snug">{s.name}</span>
-                  <span className="block text-base text-gray-500 dark:text-gray-400 font-normal font-sans">
+                  <span className="block text-base text-gray-500 dark:text-gray-300 font-normal font-sans">
                     {s.englishName}
                   </span>
                 </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-300">Verses: {s.ayahCount}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{s.ayahCount} :سورتون</p>
               </Link>
             ))}
           </div>

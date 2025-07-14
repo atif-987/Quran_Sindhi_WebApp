@@ -18,14 +18,12 @@ export async function GET() {
     if (!res.ok || !json.data) {
       throw new Error('Failed to fetch data');
     }
-    console.log("First surah object:", json.data.surahs[0]);  
       const surahs = json.data.surahs.map((surah: Surah) => ({
       chapter: surah.number,
       name: surah.name,
       englishName: surah.englishName,
       ayahCount: surah.ayahs.length,
     }));
-    console.log("surahs", surahs);  
 
     return NextResponse.json(surahs);
   } catch (error) {
