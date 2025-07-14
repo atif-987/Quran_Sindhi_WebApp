@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Analytics } from "@vercel/analytics/next"
 type Chapter = {
   chapter: number;
   englishName: string;

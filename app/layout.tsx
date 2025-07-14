@@ -1,5 +1,6 @@
 import './globals.css'
 import DarkModeToggle from './components/DarkModeToggle';
+import { Analytics } from "@vercel/analytics/next"
 
 export default function RootLayout({
   children,
@@ -25,6 +26,8 @@ export default function RootLayout({
         </header>
         <main className="flex-1 w-full  mx-auto  py-8"> 
           {children}
+          <Analytics />
+
         </main>
         <footer className="w-full bg-white/80 backdrop-blur border-t border-gray-200 py-3 text-center text-gray-500 text-sm mt-8">
           &copy; {new Date().toDateString()} Quranic Sindhi Tarjumo. All rights reserved.
