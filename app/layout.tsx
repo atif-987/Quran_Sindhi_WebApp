@@ -32,6 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <meta name="google-site-verification" content="pKzy76IAiZ2GCIzwkzUZXkv6k9mhGhtluVnJt-ZOGXE" />
       <body className="bg-gradient-to-br from-blue-50 to-white min-h-screen flex flex-col">
         <header className="w-full bg-white/80 backdrop-blur border-b border-gray-200 shadow-sm py-4 px-6 flex items-center justify-between">
           <div className="flex items-center justify-center gap-2">
