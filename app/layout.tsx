@@ -21,7 +21,12 @@ export const metadata = {
   alternates: {
     canonical: 'https://quransindhitarjumo.vercel.app',
   },
-
+  icons: {
+    icon: '/android-chrome-512x512.png',
+    shortcut: '/android-chrome-512x512.png',
+    apple: '/android-chrome-512x512.png',
+  },
+  
   openGraph: {
     title: 'قرآن سنڌي ترجمو',
     description: 'Access the Holy Quran with complete Sindhi translation. Read, explore, and connect spiritually.',
