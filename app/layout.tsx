@@ -4,26 +4,60 @@ import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: 'قرآن سنڌي ترجمو',
-  description: 'Quran Translation in Sindhi Language',
+  description: 'Quran Translation in Sindhi Language with easy access to all Surahs, translations, and reading tools.',
+  keywords: [
+    'Quran Sindhi',
+    'Sindhi Tarjumo',
+    'قرآن سنڌي ترجمو',
+    'Sindhi Quran Translation',
+    'Quran in Sindhi',
+    'Quran App',
+    'Read Quran',
+    'Sindhi Tafsir'
+  ],
+  metadataBase: new URL('https://quransindhitarjumo.vercel.app'),
+  alternates: {
+    canonical: 'https://quransindhitarjumo.vercel.app',
+  },
+
   openGraph: {
     title: 'قرآن سنڌي ترجمو',
-    description: 'Quran Translation in Sindhi',
+    description: 'Access the Holy Quran with complete Sindhi translation. Read, explore, and connect spiritually.',
     url: 'https://quransindhitarjumo.vercel.app',
     siteName: 'Quran Sindhi Tarjumo',
     images: [
       {
-        url: '/favicon.ico',
+        url: 'https://quransindhitarjumo.vercel.app/favicon.ico', // ideally replace with og-image.png
         width: 48,
         height: 48,
-        alt: 'Quran Icon',
+        alt: 'قرآن سنڌي ترجمو - Icon',
       },
     ],
+    locale: 'en_PK',
     type: 'website',
   },
+
+  twitter: {
+    card: 'summary',
+    title: 'قرآن سنڌي ترجمو',
+    description: 'Holy Quran translation in Sindhi language with clean UI and reading experience.',
+    images: ['https://quransindhitarjumo.vercel.app/favicon.ico'],
+    site: '@', // Optional
+    creator: '@', // Optional
+  },
+
   icons: {
     icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
+
+
+  other: {
+    'google-site-verification': '26LIxcPY6P7po0dtbD9Mr0MrDUQg8QnNGG7U-EA2w9k',
   },
 };
+
 
 export default function RootLayout({
   children,
@@ -32,7 +66,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <meta name="google-site-verification" content="pKzy76IAiZ2GCIzwkzUZXkv6k9mhGhtluVnJt-ZOGXE" />
       <body className="bg-gradient-to-br from-blue-50 to-white min-h-screen flex flex-col">
         <header className="w-full bg-white/80 backdrop-blur border-b border-gray-200 shadow-sm py-4 px-6 flex items-center justify-between">
           <div className="flex items-center justify-center gap-2">
