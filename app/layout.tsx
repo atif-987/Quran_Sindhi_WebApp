@@ -13,9 +13,16 @@ export const metadata = {
     'Quran in Sindhi',
     'Quran App',
     'Read Quran',
-    'Sindhi Tafsir'
+    'Sindhi Tafsir',
   ],
   metadataBase: new URL('https://quransindhitarjumo.vercel.app'),
+
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
+
   alternates: {
     canonical: 'https://quransindhitarjumo.vercel.app',
   },
@@ -25,31 +32,32 @@ export const metadata = {
     description: 'Access the Holy Quran with complete Sindhi translation. Read, explore, and connect spiritually.',
     url: 'https://quransindhitarjumo.vercel.app',
     siteName: 'Quran Sindhi Tarjumo',
+    locale: 'sd_PK',
+    type: 'website',
     images: [
       {
         url: 'https://quransindhitarjumo.vercel.app/preview.jpg',
-        width: 1200,
-        height: 630,
+        width: 2048, // actual image size
+        height: 2048,
         alt: 'قرآن سنڌي ترجمو - Icon',
-         type: 'image/jpeg'
+        type: 'image/jpeg',
       },
     ],
-    locale: 'sd_PK', // better suited for Sindhi
-    type: 'website',
   },
 
   twitter: {
-    card: 'summary_large_image', // better preview card
+    card: 'summary_large_image',
     title: 'قرآن سنڌي ترجمو',
     description: 'Holy Quran translation in Sindhi language with clean UI and reading experience.',
-    images: ['https://quransindhitarjumo.vercel.app/preview.jpg'],
-    // site and creator optional, remove if unused
-  },
-
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
+    images: [
+      {
+        url: 'https://quransindhitarjumo.vercel.app/preview.jpg',
+        width: 2048,
+        height: 2048,
+        alt: 'قرآن سنڌي ترجمو - Icon',
+        type: 'image/jpeg',
+      },
+    ],
   },
 
   other: {
