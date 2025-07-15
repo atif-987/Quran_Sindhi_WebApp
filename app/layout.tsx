@@ -27,7 +27,7 @@ export const metadata = {
     siteName: 'Quran Sindhi Tarjumo',
     images: [
       {
-        url: 'https://quransindhitarjumo.vercel.app/favicon.ico', // ideally replace with og-image.png
+        url: 'https://quransindhitarjumo.vercel.app/preview.jpg', // ideally replace with og-image.png
         width: 48,
         height: 48,
         alt: 'قرآن سنڌي ترجمو - Icon',
@@ -41,7 +41,7 @@ export const metadata = {
     card: 'summary',
     title: 'قرآن سنڌي ترجمو',
     description: 'Holy Quran translation in Sindhi language with clean UI and reading experience.',
-    images: ['https://quransindhitarjumo.vercel.app/favicon.ico'],
+    images: ['https://quransindhitarjumo.vercel.app/preview.jpg'],
     site: '@', // Optional
     creator: '@', // Optional
   },
