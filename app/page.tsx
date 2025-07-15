@@ -61,7 +61,7 @@ export default function Home() {
           </div>
 
           {/* Search */}
-          <div className="flex justify-center"> 
+          <div className="flex justify-center">
             <div className="relative w-full max-w-md">
               <input
                 type="text"
@@ -96,7 +96,7 @@ export default function Home() {
 
           {/* Section Title */}
           <h2 className="text-center text-2xl sm:text-3xl font-semibold text-gray-700 dark:text-gray-100 mt-4">
-          سورتن جي فهرست
+            سورتن جي فهرست
           </h2>
 
           {/* Chapters Grid */}
@@ -122,12 +122,12 @@ export default function Home() {
                     </span>
                   </h2>
                   <p className="text-sm text-gray-600 dark:text-gray-400 flex flex-row-reverse items-center justify-end gap-1 text-right">
-  <span>:آيتون</span>
-  <span  dir="rtl">{s.ayahCount}</span>
-</p>
+                    <span>:آيتون</span>
+                    <span dir="rtl">{s.ayahCount}</span>
+                  </p>
 
 
-                  </Link>
+                </Link>
               ))}
             </div>
           ) : (

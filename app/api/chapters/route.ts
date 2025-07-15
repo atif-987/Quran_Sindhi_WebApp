@@ -18,7 +18,7 @@ export async function GET() {
     if (!res.ok || !json.data) {
       throw new Error('Failed to fetch data');
     }
-      const surahs = json.data.surahs.map((surah: Surah) => ({
+    const surahs = json.data.surahs.map((surah: Surah) => ({
       chapter: surah.number,
       name: surah.name,
       englishName: surah.englishName,

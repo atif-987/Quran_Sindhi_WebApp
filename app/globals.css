@@ -30,7 +30,7 @@ body {
   line-height: 2.7rem;
   letter-spacing: 0.01em;
   word-spacing: 0.1em;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.07);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
   transition: background 0.2s;
 }
 
@@ -42,7 +42,7 @@ body {
   line-height: 4rem !important;
   letter-spacing: 0.01em;
   word-spacing: 0.1em;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.07);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
   transition: background 0.2s;
 }
 
@@ -58,11 +58,12 @@ body {
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   margin-top: 0.5rem;
-  box-shadow: 0 1px 4px rgba(27,77,62,0.04);
+  box-shadow: 0 1px 4px rgba(27, 77, 62, 0.04);
   letter-spacing: 0.01em;
   word-spacing: 0.1em;
   transition: background 0.2s;
 }
+
 .sindhi-text-nobackground {
   font-family: 'Lateef', serif;
   direction: rtl;
@@ -76,7 +77,9 @@ body {
   word-spacing: 0.1em;
   transition: background 0.2s;
 }
-.sindhi-text:hover, .sindhi-text:focus {
+
+.sindhi-text:hover,
+.sindhi-text:focus {
   background: #e6f7ee;
 }
 
@@ -84,13 +87,14 @@ body {
   border: 1px solid #e5e7eb;
   border-radius: 1.25rem;
   background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   padding: 2rem 1.5rem;
   margin-bottom: 2rem;
   transition: box-shadow 0.2s, border 0.2s;
 }
+
 .card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   border-color: #c7d2fe;
 }
 
