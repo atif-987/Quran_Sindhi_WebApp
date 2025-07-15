@@ -31,6 +31,7 @@ export const metadata = {
         width: 1200,
         height: 630,
         alt: 'قرآن سنڌي ترجمو - Icon',
+         type: 'image/jpeg'
       },
     ],
     locale: 'sd_PK', // better suited for Sindhi
