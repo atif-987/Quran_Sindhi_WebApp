@@ -27,23 +27,22 @@ export const metadata = {
     siteName: 'Quran Sindhi Tarjumo',
     images: [
       {
-        url: 'https://quransindhitarjumo.vercel.app/preview.jpg', // ideally replace with og-image.png
-        width: 48,
-        height: 48,
+        url: 'https://quransindhitarjumo.vercel.app/preview.jpg',
+        width: 1200,
+        height: 630,
         alt: 'قرآن سنڌي ترجمو - Icon',
       },
     ],
-    locale: 'en_PK',
+    locale: 'sd_PK', // better suited for Sindhi
     type: 'website',
   },
 
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image', // better preview card
     title: 'قرآن سنڌي ترجمو',
     description: 'Holy Quran translation in Sindhi language with clean UI and reading experience.',
     images: ['https://quransindhitarjumo.vercel.app/preview.jpg'],
-    site: '@', // Optional
-    creator: '@', // Optional
+    // site and creator optional, remove if unused
   },
 
   icons: {
@@ -52,11 +51,11 @@ export const metadata = {
     apple: '/favicon.ico',
   },
 
-
   other: {
     'google-site-verification': '26LIxcPY6P7po0dtbD9Mr0MrDUQg8QnNGG7U-EA2w9k',
   },
 };
+
 
 
 export default function RootLayout({
