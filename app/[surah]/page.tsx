@@ -79,12 +79,12 @@ export default async function SurahPage({
                 key={ayah.numberInSurah}
                 className="p-5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow transition hover:shadow-lg"
               >
-           <p className="arabic-text !text-4xl leading-relaxed font-bold tracking-wide text-blue-900 dark:text-yellow-200 text-right mb-3">
+           <p className="arabic-text-ayat !text-4xl leading-relaxed font-bold tracking-wide text-blue-900 dark:text-yellow-200 text-right mb-3">
   {ayah.text}
 </p>
 
                 {ayah.translation && (
-                  <p className="sindhi-text text-lg font-medium text-gray-700 dark:text-green-200 mt-2 text-right">
+                  <p className="sindhi-text text-lg font-medium text-gray-700 dark:bg-gray-800 dark:text-blue-200 mt-2 text-right">
                     {ayah.translation}
                   </p>
                 )}
