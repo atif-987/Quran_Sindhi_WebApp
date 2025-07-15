@@ -62,18 +62,24 @@ export default function Home() {
 
           {/* Search */}
           <div className="flex justify-center">
-            <div className="relative w-full max-w-md">
-              <input
-                type="text"
-                className="w-full pl-10 pr-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white shadow-md"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-300">
-                🔍
-              </div>
-            </div>
-          </div>
+  <div className="relative w-full max-w-md">
+    <input
+      type="text"
+      dir="rtl"
+      className="w-full pr-10 pl-4 py-3 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white shadow-md text-right placeholder-gray-900 dark:placeholder-gray-300 text-lg placeholder:text-lg placeholder:font-large"
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      placeholder="سورت، آيت يا لفظ ڳوليو..."
+    />
+    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-300">
+      🔍
+    </div>
+  </div>
+</div>
+
+
+
+
 
           {/* Last Read */}
           {lastRead && (() => {
@@ -86,7 +92,7 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6l4 2m6 2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2z" />
                   </svg>
                 </span>
-                <span className="sindhi-text-nobackground font-semibold text-base">آخري پڙهيل سورت:</span>
+                <span className="sindhi-text-nobackground font-semibold text-base dark:text-red-500">آخري پڙهيل سورت:</span>
                 <Link href={`/${lastRead}`} className="arabic-text text-xl font-bold text-blue-700 dark:text-yellow-300 underline ml-2">
                   {lastReadSurah.name}
                 </Link>
