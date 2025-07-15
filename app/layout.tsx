@@ -17,11 +17,6 @@ export const metadata = {
   ],
   metadataBase: new URL('https://quransindhitarjumo.vercel.app'),
 
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
-  },
 
   alternates: {
     canonical: 'https://quransindhitarjumo.vercel.app',
