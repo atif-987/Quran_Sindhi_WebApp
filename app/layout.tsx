@@ -63,9 +63,6 @@ export const metadata = {
     ],
   },
 
-  other: {
-    'google-site-verification': '26LIxcPY6P7po0dtbD9Mr0MrDUQg8QnNGG7U-EA2w9k'
-  },
 };
 
 
