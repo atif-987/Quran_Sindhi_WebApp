@@ -3,33 +3,35 @@ import DarkModeToggle from './components/DarkModeToggle';
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
-  title: 'قرآن سنڌي ترجمو',
-  description: 'Quran Translation in Sindhi Language with easy access to all Surahs, translations, and reading tools.',
+  title: 'قرآن پاڪ سنڌي ترجمو',
+  description: 'قرآن پاڪ جو سنڌي ترجمو، هر سورت لاءِ آسان رسائي، پڙهڻ، سمجھڻ ۽ روحاني لاڳاپي لاءِ بهترين اوزار.',
   keywords: [
+    'قرآن پاڪ سنڌي ترجمو',
+    'قرآن پاڪ سنڌي',
     'Quran Sindhi',
     'Sindhi Tarjumo',
-    'قرآن سنڌي ترجمو',
     'Sindhi Quran Translation',
     'Quran in Sindhi',
-    'Quran App',
     'Read Quran',
     'Sindhi Tafsir',
+    'سنڌي تفسير',
+    'قرآن سنڌي ايپ',
   ],
   metadataBase: new URL('https://quransindhitarjumo.vercel.app'),
-
 
   alternates: {
     canonical: 'https://quransindhitarjumo.vercel.app',
   },
+
   icons: {
     icon: '/android-chrome-512x512.png',
     shortcut: '/android-chrome-512x512.png',
     apple: '/android-chrome-512x512.png',
   },
-  
+
   openGraph: {
-    title: 'قرآن سنڌي ترجمو',
-    description: 'Access the Holy Quran with complete Sindhi translation. Read, explore, and connect spiritually.',
+    title: 'قرآن پاڪ سنڌي ترجمو',
+    description: 'سنڌي ٻوليءَ ۾ قرآن پاڪ جو مڪمل ترجمو، سورتن جي آسان ڳولا، پڙهڻ ۽ سمجھڻ لاءِ سادي ۽ خوبصورت ترتيب.',
     url: 'https://quransindhitarjumo.vercel.app',
     siteName: 'Quran Sindhi Tarjumo',
     locale: 'sd_PK',
@@ -37,9 +39,9 @@ export const metadata = {
     images: [
       {
         url: 'https://quransindhitarjumo.vercel.app/preview.jpg',
-        width: 2048, // actual image size
+        width: 2048,
         height: 2048,
-        alt: 'قرآن سنڌي ترجمو - Icon',
+        alt: 'قرآن پاڪ سنڌي ترجمو - پيش منظر',
         type: 'image/jpeg',
       },
     ],
@@ -47,14 +49,14 @@ export const metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    title: 'قرآن سنڌي ترجمو',
-    description: 'Holy Quran translation in Sindhi language with clean UI and reading experience.',
+    title: 'قرآن پاڪ سنڌي ترجمو',
+    description: 'سنڌي ٻوليءَ ۾ قرآن پاڪ جو ترجمو، صاف ۽ آسان انٽرفيس سان. پڙهو، ڳولا ڪريو، روحانيت ڳولهيو.',
     images: [
       {
         url: 'https://quransindhitarjumo.vercel.app/preview.jpg',
         width: 2048,
         height: 2048,
-        alt: 'قرآن سنڌي ترجمو - Icon',
+        alt: 'قرآن پاڪ سنڌي ترجمو - پيش منظر',
         type: 'image/jpeg',
       },
     ],
@@ -62,6 +64,7 @@ export const metadata = {
 
   other: {
     'google-site-verification': '26LIxcPY6P7po0dtbD9Mr0MrDUQg8QnNGG7U-EA2w9k',
+    'fb:app_id': '713379274794542', 
   },
 };
 
