@@ -1,6 +1,7 @@
 import './globals.css';
 import DarkModeToggle from './components/DarkModeToggle';
 import { Analytics } from "@vercel/analytics/next";
+import CustomMetaTags from './components/CustomMetaTags';
 
 export const metadata = {
   title: 'قرآن پاڪ سنڌي ترجمو',
@@ -77,6 +78,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <CustomMetaTags />
+      </head>
       <body className="bg-gradient-to-br from-blue-50 to-white min-h-screen flex flex-col">
         <header className="w-full bg-white/80 backdrop-blur border-b border-gray-200 shadow-sm py-4 px-6 flex items-center justify-between">
           <div className="flex items-center justify-center gap-2">
