@@ -2,7 +2,7 @@ import './globals.css';
 import DarkModeToggle from './components/DarkModeToggle';
 import { Analytics } from "@vercel/analytics/next";
 import CustomMetaTags from './components/CustomMetaTags';
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 export const metadata = {
   title: 'قرآن پاڪ سنڌي ترجمو',
   description: 'قرآن پاڪ جو سنڌي ترجمو، هر سورت لاءِ آسان رسائي، پڙهڻ، سمجھڻ ۽ روحاني لاڳاپي لاءِ بهترين اوزار.',
@@ -87,6 +87,8 @@ export default function RootLayout({
         <main className="flex-1 w-full mx-auto">
           {children}
           <Analytics />
+          <SpeedInsights />
+
         </main>
         <footer className="w-full bg-white/80 backdrop-blur border-t border-gray-200 py-6 text-center text-gray-500 text-sm">
           &copy; {new Date().getFullYear()} Quranic Sindhi Tarjumo. All rights reserved.
