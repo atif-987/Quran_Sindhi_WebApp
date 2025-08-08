@@ -113,7 +113,7 @@ export default function Home() {
               ))}
             </div>
           ) : filteredChapters.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-right" dir="ltr">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-right" dir="rtl">
               {filteredChapters.map((s) => (
                 <Link
                   key={s.chapter}
