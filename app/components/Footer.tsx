@@ -32,7 +32,7 @@ export default function Footer() {
             <h3 className="text-base font-semibold text-gray-800 dark:text-gray-100">حمايت</h3>
             <ul className="mt-2 space-y-2 text-sm">
               <li>
-                <a href="mailto:hello@example.com" className="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-yellow-300 transition-colors">
+                <a href="mailto:dmohammadatif@gmail.com" className="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-yellow-300 transition-colors">
                   رابطو ڪريو
                 </a>
               </li>
@@ -42,9 +42,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-6 text-center text-xs text-gray-500 dark:text-gray-400">
-          Built with Next.js & Tailwind CSS
-        </div>
+
       </div>
     </footer>
   );

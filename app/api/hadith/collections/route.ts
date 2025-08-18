@@ -10,12 +10,32 @@ export async function GET() {
       return NextResponse.json({ error: 'Failed to fetch hadith collections' }, { status: 500 });
     }
     const data = await res.json();
-    // Normalize (keep API's slug id and readable name)
-    const collections = (data?.data || []).map((b: any) => ({
-      id: b?.id,
-      name: b?.name,
-      available: b?.available,
-    }));
+    // Prefer Arabic display names for well-known collections
+    const ARABIC_NAMES: Record<string, string> = {
+      bukhari: 'صحيح البخاري',
+      muslim: 'صحيح مسلم',
+      'abu-daud': 'سنن أبي داود',
+      'abu-dawud': 'سنن أبي داود',
+      tirmidzi: 'سنن الترمذي',
+      tirmidhi: 'سنن الترمذي',
+      nasai: 'سنن النسائي',
+      'an-nasai': 'سنن النسائي',
+      'ibnu-majah': 'سنن ابن ماجه',
+      'ibn-majah': 'سنن ابن ماجه',
+      malik: 'موطأ مالك',
+      darimi: 'سنن الدارمي',
+      ahmad: 'مسند أحمد',
+    };
+
+    // Normalize (keep API's slug id and use Arabic name when available)
+    const collections = (data?.data || []).map((b: any) => {
+      const id = b?.id as string;
+      return {
+        id,
+        name: ARABIC_NAMES[id] || b?.name,
+        available: b?.available,
+      };
+    });
     return NextResponse.json({ collections });
   } catch (e) {
     return NextResponse.json({ error: 'Unexpected error fetching collections' }, { status: 500 });
