@@ -62,11 +62,11 @@ export default async function SurahPage({
 
           {/* Header */}
           <div className="text-center">
-            <h1 className="text-2xl sm:text-8xl md:text-6xl  font-extrabold text-blue-800 dark:text-yellow-400 tracking-tight sindhi-text-nobackground !text-center font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-yellow-600 to-orange-500 drop-shadow-[2px_2px_3px_rgba(0,0,0,0.5)] dark:from-yellow-300 dark:via-yellow-500 dark:to-yellow-100 mb-2 arabic-text">
+            <h1 className="font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-yellow-600 to-orange-500 drop-shadow-[2px_2px_3px_rgba(0,0,0,0.5)] dark:from-yellow-300 dark:via-yellow-500 dark:to-yellow-100 mb-2 arabic-text">
               {surahData.name}
             </h1>
             {(surahData.englishName || surahData.englishNameTranslation) && (
-              <p className="text-xl sm:text-2xl font-medium text-gray-600 dark:text-gray-300">
+              <p className="text-lg sm:text-xl font-medium text-gray-600 dark:text-gray-300">
                 {surahData.englishName || surahData.englishNameTranslation}
               </p>
             )}
@@ -79,12 +79,12 @@ export default async function SurahPage({
                 key={ayah.numberInSurah}
                 className="p-5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow transition hover:shadow-lg"
               >
-                <p className="arabic-text-ayat !text-4xl leading-relaxed font-bold tracking-wide text-blue-900 dark:text-yellow-200 text-right mb-3">
+                <p className="arabic-text-ayat leading-relaxed font-bold tracking-wide text-blue-900 dark:text-yellow-200 text-right mb-3">
                   {ayah.text}
                 </p>
 
                 {ayah.translation && (
-                  <p className="sindhi-text text-lg font-medium text-gray-700 dark:bg-gray-800 dark:text-blue-200 mt-2 text-right">
+                  <p className="sindhi-text font-medium text-gray-700 dark:bg-gray-800 dark:text-blue-200 mt-2 text-right">
                     {ayah.translation}
                   </p>
                 )}
