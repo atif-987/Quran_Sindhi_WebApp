@@ -239,7 +239,7 @@ async function translateWithGoogle(text: string, from: string, to: string): Prom
       const res = await fetch(url, { cache: 'no-store' });
       if (!res.ok) continue;
       const data = await res.json();
-      const segment = Array.isArray(data) && Array.isArray(data[0]) ? data[0].map((r: any) => r[0]).join(' ') : '';
+      const segment = Array.isArray(data) && Array.isArray(data[0]) ? data[0].map((r: string[]) => r[0]).join(' ') : '';
       outputs.push(segment || '');
     }
     const out = sanitizeSindhiText(outputs.join(' '));
@@ -253,8 +253,7 @@ async function translateWithGoogle(text: string, from: string, to: string): Prom
 async function getUrduHadith(
   collection: string,
   number: string,
-  arabicText: string,
-  req: NextRequest
+  arabicText: string
 ): Promise<{ urdu: string | null; source: 'authoritative-ur' | 'machine:ur' | null }> {
   try {
     const template = process.env.URDU_HADITH_API_URL_TEMPLATE;
@@ -378,7 +377,7 @@ export async function GET(
       source = process.env.SINDHI_HADITH_API_URL_TEMPLATE ? 'authoritative' : 'local';
     } else if (arabicText && arabicText !== "Not found") {
       // Prefer Urdu first (authoritative or machine), then translate Urdu -> Sindhi
-      const urd = await getUrduHadith(params.collection, params.number, arabicText, req);
+      const urd = await getUrduHadith(params.collection, params.number, arabicText);
       if (urd.urdu) {
         urduText = urd.urdu;
         const sdFromUr = await translateMyMemoryGeneric(urd.urdu, 'ur', 'sd');

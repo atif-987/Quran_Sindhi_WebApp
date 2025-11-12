@@ -7,7 +7,10 @@ type HadithResponse = {
   number: string;
   arabic: string | null;
   sindhi: string | null;
-  meta?: any;
+  meta?: {
+    source?: string;
+    note?: string;
+  };
 };
 
 export default function HadithReaderPage() {
@@ -30,8 +33,8 @@ export default function HadithReaderPage() {
       const json = await res.json();
       if (!res.ok) throw new Error(json?.error || 'Failed to fetch');
       setData(json);
-    } catch (e: any) {
-      setError(e?.message || 'Failed to fetch hadith');
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Failed to fetch hadith');
     } finally {
       setLoading(false);
     }

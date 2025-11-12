@@ -1,5 +1,4 @@
 import './globals.css';
-import DarkModeToggle from './components/DarkModeToggle';
 import { Analytics } from "@vercel/analytics/next";
 import CustomMetaTags from './components/CustomMetaTags';
 import { SpeedInsights } from "@vercel/speed-insights/next"

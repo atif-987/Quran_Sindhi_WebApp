@@ -16,8 +16,8 @@ export default function HadithCollectionsPage() {
         const data = await res.json();
         if (!res.ok) throw new Error(data?.error || 'Failed');
         setCollections(data.collections || []);
-      } catch (e: any) {
-        setError(e?.message || 'Failed to load collections');
+      } catch (e) {
+        setError(e instanceof Error ? e.message : 'Failed to load collections');
       } finally {
         setLoading(false);
       }

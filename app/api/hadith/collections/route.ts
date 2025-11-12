@@ -28,7 +28,7 @@ export async function GET() {
     };
 
     // Normalize (keep API's slug id and use Arabic name when available)
-    const collections = (data?.data || []).map((b: any) => {
+    const collections = (data?.data || []).map((b: { id: string; name: string; available?: number }) => {
       const id = b?.id as string;
       return {
         id,
@@ -37,7 +37,7 @@ export async function GET() {
       };
     });
     return NextResponse.json({ collections });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Unexpected error fetching collections' }, { status: 500 });
   }
 }

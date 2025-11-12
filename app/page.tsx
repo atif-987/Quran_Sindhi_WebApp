@@ -22,7 +22,6 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [lastRead, setLastRead] = useState<number | null>(null);
-  const [searchResults, setSearchResults] = useState<Chapter[]>([]);
   const [activeTab, setActiveTab] = useState<'surah' | 'juz'>('surah');
 
   useEffect(() => {
@@ -105,16 +104,6 @@ export default function Home() {
     </div>
   </div>
 </div>
-
-
-{searchResults && (
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-right" dir="rtl">
-    {searchResults.map((s) => (
-      <Link key={s.chapter} href={`/${s.chapter}`}>{s.name}</Link>
-    ))}
-  </div>
-)}
-
 
           {/* Last Read */}
           {lastRead && (() => {
