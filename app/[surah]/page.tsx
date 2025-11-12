@@ -1,5 +1,6 @@
 // app/[surah]/page.tsx
 import Link from 'next/link';
+import { Metadata } from 'next';
 
 interface Ayah {
   number: number;
@@ -16,6 +17,54 @@ interface SurahData {
 }
 
 type SurahApiResponse = { data: SurahData } | { error: string };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { surah: string };
+}): Promise<Metadata> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  
+  try {
+    const res = await fetch(`${baseUrl}/api/surah/${params.surah}`, { cache: 'no-store' });
+    
+    if (res.ok) {
+      const data: SurahApiResponse = await res.json();
+      
+      if ('data' in data) {
+        const surahData = data.data;
+        const title = `${surahData.name} - سورت ${params.surah} | قرآن پاڪ سنڌي ترجمو`;
+        const description = `سورت ${surahData.name} (${surahData.englishName}) جو سنڌي ترجمو، ${surahData.ayahs.length} آيتون. ${surahData.englishNameTranslation || ''} - Read Surah ${surahData.englishName} in Sindhi translation.`;
+        
+        return {
+          title,
+          description,
+          openGraph: {
+            title,
+            description,
+            url: `https://quransindhitarjumo.vercel.app/${params.surah}`,
+            type: 'article',
+          },
+          twitter: {
+            card: 'summary',
+            title,
+            description,
+          },
+          alternates: {
+            canonical: `https://quransindhitarjumo.vercel.app/${params.surah}`,
+          },
+        };
+      }
+    }
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+  }
+  
+  return {
+    title: `سورت ${params.surah} | قرآن پاڪ سنڌي ترجمو`,
+    description: `قرآن پاڪ جي سورت نمبر ${params.surah} جو سنڌي ترجمو. Quran Surah ${params.surah} in Sindhi translation.`,
+  };
+}
 
 export default async function SurahPage({
   params,

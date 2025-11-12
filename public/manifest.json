@@ -1,0 +1,22 @@
+{
+  "name": "قرآن پاڪ سنڌي ترجمو - Quran Sindhi Translation",
+  "short_name": "Quran Sindhi",
+  "description": "قرآن پاڪ جو سنڌي ترجمو - Complete Quran translation in Sindhi with 114 Surahs and 30 Juz",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1d4ed8",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "lang": "sd",
+  "dir": "rtl",
+  "categories": ["education", "lifestyle", "books","religion"],
+  "screenshots": []
+}

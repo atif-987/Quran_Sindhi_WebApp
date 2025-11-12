@@ -1,5 +1,6 @@
 // app/juz/[id]/page.tsx
 import Link from 'next/link';
+import { Metadata } from 'next';
 
 interface Verse {
   verseKey: string;
@@ -15,6 +16,46 @@ interface JuzData {
 }
 
 type JuzApiResponse = { data: JuzData } | { error: string };
+
+const juzNames = [
+  'الم', 'سيقول', 'تلك الرسل', 'لن تنالوا', 'والمحصنات', 'لا يحب الله',
+  'وإذا سمعوا', 'ولو أننا', 'قال الملأ', 'واعلموا', 'يعتذرون',
+  'وما من دابة', 'وما أبرئ', 'ربما', 'سبحان الذي', 'قال ألم',
+  'اقترب للناس', 'قد أفلح', 'وقال الذين', 'امن خلق', 'اتل ما أوحي',
+  'ومن يقنت', 'ومالي', 'فمن أظلم', 'إليه يرد', 'حم', 'قال فما خطبكم',
+  'قد سمع الله', 'تبارك الذي', 'عم يتساءلون'
+];
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const juzNumber = parseInt(params.id);
+  const juzName = juzNames[juzNumber - 1] || '';
+  
+  const title = `پارو ${juzNumber} - ${juzName} | قرآن پاڪ سنڌي ترجمو`;
+  const description = `قرآن پاڪ جو پارو نمبر ${juzNumber} (${juzName}) سنڌي ترجمي سان. Quran Juz ${juzNumber} with Sindhi translation. Read complete Para ${juzNumber} online.`;
+  
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `https://quransindhitarjumo.vercel.app/juz/${params.id}`,
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary',
+      title,
+      description,
+    },
+    alternates: {
+      canonical: `https://quransindhitarjumo.vercel.app/juz/${params.id}`,
+    },
+  };
+}
 
 export default async function JuzDetailPage({
   params,
