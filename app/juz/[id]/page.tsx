@@ -71,13 +71,13 @@ export default async function JuzDetailPage({
 
           {/* Header */}
           <div className="text-center">
-            <div className="inline-block px-4 py-2 bg-blue-100 dark:bg-gray-700 text-blue-700 dark:text-yellow-300 rounded-full text-sm font-semibold mb-4">
+            <div className="inline-block px-3 sm:px-4 py-1 sm:py-2 bg-blue-100 dark:bg-gray-700 text-blue-700 dark:text-yellow-300 rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
               پارو {juzData.number}
             </div>
-            <h1 className="font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-yellow-600 to-orange-500 drop-shadow-[2px_2px_3px_rgba(0,0,0,0.5)] dark:from-yellow-300 dark:via-yellow-500 dark:to-yellow-100 mb-2 sindhi-text-nobackground text-5xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-yellow-600 to-orange-500 drop-shadow-[2px_2px_3px_rgba(0,0,0,0.5)] dark:from-yellow-300 dark:via-yellow-500 dark:to-yellow-100 mb-2 sindhi-text-nobackground">
               {sindhiNames[juzData.number]}
             </h1>
-            <p className="text-lg sm:text-xl font-medium text-gray-600 dark:text-gray-300 arabic-text">
+            <p className="text-base sm:text-lg md:text-xl font-medium text-gray-600 dark:text-gray-300 arabic-text">
               {juzData.nameArabic}
             </p>
           </div>
@@ -112,16 +112,16 @@ export default async function JuzDetailPage({
           </div>
 
           {/* Back Button */}
-          <div className="text-center pt-6 flex gap-4 justify-center">
+          <div className="text-center pt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <Link
               href="/juz"
-              className="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-yellow-600 dark:hover:bg-yellow-700 text-white rounded-lg text-lg font-semibold transition"
+              className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 dark:bg-yellow-600 dark:hover:bg-yellow-700 text-white rounded-lg text-base sm:text-lg font-semibold transition"
             >
               ← پارن ڏانھن واپس
             </Link>
             <Link
               href="/"
-              className="inline-block px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg text-lg font-semibold transition"
+              className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg text-base sm:text-lg font-semibold transition"
             >
               ← گھر واپس وڃو
             </Link>

@@ -82,8 +82,8 @@ export default function Home() {
         <div className="max-w-6xl mx-auto bg-white/90 dark:bg-gray-900/90 backdrop-blur-md rounded-xl p-8 shadow-2xl text-gray-800 dark:text-gray-100 space-y-10">
 
           {/* Header */}
-          <div className="text-center">
-            <h1 className="!text-center xl:text-8xl sm:!text-8xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-blue-500 dark:from-yellow-300 dark:to-yellow-500 drop-shadow-[2px_2px_3px_rgba(0,0,0,0.2)] dark:drop-shadow-[2px_2px_3px_rgba(0,0,0,0.5)] sindhi-text-nobackground">
+          <div className="text-center w-full">
+            <h1 className="text-center mx-auto text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-blue-500 dark:from-yellow-300 dark:to-yellow-500 drop-shadow-[2px_2px_3px_rgba(0,0,0,0.2)] dark:drop-shadow-[2px_2px_3px_rgba(0,0,0,0.5)] sindhi-text-nobackground">
               قرآن سنڌي ترجمو
             </h1>
           </div>
@@ -128,7 +128,7 @@ export default function Home() {
           <div className="flex justify-center gap-2">
             <button
               onClick={() => setActiveTab('surah')}
-              className={`px-6 py-3 rounded-lg font-semibold text-lg transition-all ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-base sm:text-lg transition-all ${
                 activeTab === 'surah'
                   ? 'bg-blue-600 dark:bg-yellow-600 text-white shadow-lg'
                   : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
@@ -138,7 +138,7 @@ export default function Home() {
             </button>
             <button
               onClick={() => setActiveTab('juz')}
-              className={`px-6 py-3 rounded-lg font-semibold text-lg transition-all ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-base sm:text-lg transition-all ${
                 activeTab === 'juz'
                   ? 'bg-blue-600 dark:bg-yellow-600 text-white shadow-lg'
                   : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
@@ -149,7 +149,7 @@ export default function Home() {
           </div>
 
           {/* Section Title */}
-          <h2 className="text-center text-2xl sm:text-3xl font-semibold text-gray-700 dark:text-gray-100 mt-4">
+          <h2 className="text-center text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-100 mt-4">
             {activeTab === 'surah' ? 'سورتن جي فهرست' : 'پارن جي فهرست'}
           </h2>
 
