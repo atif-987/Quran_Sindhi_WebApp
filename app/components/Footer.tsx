@@ -25,6 +25,11 @@ export default function Footer() {
                   سورتن جي فهرست
                 </Link>
               </li>
+              <li>
+                <Link href="/juz" className="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-yellow-300 transition-colors">
+                  پارن جي فهرست
+                </Link>
+              </li>
             </ul>
           </div>
 

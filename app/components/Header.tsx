@@ -31,9 +31,12 @@ export default function Header() {
               <Link href="/" className="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-yellow-300 transition-colors" onClick={closeMenu}>
                 گهر
               </Link>
+              {/* <Link href="/juz" className="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-yellow-300 transition-colors" onClick={closeMenu}>
+                پارا
+              </Link>
               <Link href="/hadith" className="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-yellow-300 transition-colors" onClick={closeMenu}>
                 حديث
-              </Link>
+              </Link> */}
               {lastReadSurah ? (
                 <Link href={`/${lastReadSurah}`} className="text-gray-700 hover:text-blue-700 dark:text-gray-200 dark:hover:text-yellow-300 transition-colors" onClick={closeMenu}>
                   آخري پڙهيل
@@ -67,6 +70,9 @@ export default function Header() {
             <nav className="flex flex-col gap-2 text-base font-medium">
               <Link href="/" className="px-3 py-2 rounded-md bg-white/70 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:text-blue-700 dark:hover:text-yellow-300" onClick={closeMenu}>
                 گهر
+              </Link>
+              <Link href="/juz" className="px-3 py-2 rounded-md bg-white/70 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:text-blue-700 dark:hover:text-yellow-300" onClick={closeMenu}>
+                پارا
               </Link>
               <Link href="/hadith" className="px-3 py-2 rounded-md bg-white/70 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:text-blue-700 dark:hover:text-yellow-300" onClick={closeMenu}>
                 حديث
