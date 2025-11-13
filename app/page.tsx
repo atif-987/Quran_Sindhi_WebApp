@@ -177,8 +177,10 @@ export default function Home() {
                       </span>
                     </h2>
                     <p className="text-sm text-gray-600 dark:text-gray-400 flex flex-row-reverse items-center justify-end gap-1 text-right">
-                      <span>:آيتون</span>
-                      <span dir="rtl">{s.ayahCount}</span>
+
+                      <span>آيتون</span>
+                                                                  <span dir="rtl">{s.ayahCount}</span>
+
                     </p>
                   </Link>
                 ))}
