@@ -21,13 +21,5 @@ const nextConfig = {
         },
       ];
     },
-    async rewrites() {
-      return [
-        {
-          source: '/sitemap.xml',
-          destination: '/sitemap.xml', // Fixed to match the route
-        },
-      ];
-    },
   };
 export default nextConfig;
