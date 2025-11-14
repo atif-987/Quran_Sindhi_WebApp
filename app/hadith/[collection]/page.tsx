@@ -6,6 +6,7 @@ type HadithResponse = {
   collection: string;
   number: string;
   arabic: string | null;
+  english: string | null;
   sindhi: string | null;
   meta?: {
     source?: string;
@@ -76,19 +77,28 @@ export default function HadithReaderPage() {
       {data && (
         <div className="space-y-4">
           {data.arabic && (
-            <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-              <p className="arabic-text-ayat text-right text-blue-900 dark:text-yellow-200">{data.arabic}</p>
+            <div className="p-4 rounded-lg border border-blue-200 dark:border-blue-700 bg-blue-50/30 dark:bg-blue-900/10">
+              <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2 text-right">متن عربي</h3>
+              <p className="arabic-text-ayat text-right text-blue-900 dark:text-yellow-200 text-lg leading-loose">{data.arabic}</p>
             </div>
           )}
-          <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          
+          <div className="p-4 rounded-lg border border-yellow-200 dark:border-yellow-700 bg-yellow-50/30 dark:bg-yellow-900/10">
+            <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2 text-right">سنڌي ترجمو</h3>
             {data.sindhi ? (
-              <p className="sindhi-text text-right">{data.sindhi}</p>
+              <p className="sindhi-text text-right text-gray-800 dark:text-gray-200 leading-relaxed">{data.sindhi}</p>
             ) : (
               <p className="text-right text-sm text-gray-500 dark:text-gray-400">سنڌي ترجمو عارضي طور موجود نه آهي.</p>
             )}
           </div>
-          {data.meta && (
-            <p className="text-xs text-right text-gray-500 dark:text-gray-400">{data.meta.note}</p>
+          
+          {data.meta && data.meta.note && (
+            <div className="flex items-center justify-end gap-2 text-xs text-gray-500 dark:text-gray-400">
+              <span>{data.meta.note}</span>
+              {data.meta.source === 'sunnah.com' && (
+                <span className="px-2 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 font-medium">✓ تصديق ٿيل</span>
+              )}
+            </div>
           )}
         </div>
       )}
