@@ -1,17 +1,17 @@
 // app/api/hadith/[collection]/[number]/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
-// Sunnah.com API key for verified hadith
-const SUNNAH_API_KEY = "ZwRlcGzZEn9KWcdAE9rmW6bUVLMxKiRw9VKjpbZf";
+// Hadith API - ahadith.co.uk has comprehensive hadith database
+const HADITH_API_BASE = "https://ahadith.co.uk/api";
 
 // Collection name mapping
 const COLLECTION_MAP: Record<string, string> = {
   'bukhari': 'bukhari',
   'muslim': 'muslim',
   'tirmidhi': 'tirmidhi',
-  'abudawud': 'abudawud',
+  'abudawud': 'abu-dawood',
   'nasai': 'nasai',
-  'ibnmajah': 'ibnmajah',
+  'ibnmajah': 'ibn-majah',
   'malik': 'malik',
   'ahmad': 'ahmad'
 };
@@ -26,18 +26,19 @@ function sanitizeSindhiText(input: string): string {
   return s.trim();
 }
 
-// Translate via Urdu as intermediate language for better Sindhi quality
-async function translateToSindhi(text: string): Promise<string | null> {
+// Direct Urdu to Sindhi translation using Google Translate API
+async function translateUrduToSindhi(urduText: string): Promise<string | null> {
   try {
-    if (!text) return null;
+    if (!urduText) return null;
     
-    const MAX_LENGTH = 400;
+    const MAX_LENGTH = 500;
     
     // Helper to split text into chunks
     const splitIntoChunks = (input: string): string[] => {
       if (input.length <= MAX_LENGTH) return [input];
       
-      const sentences = input.match(/[^.!?]+[.!?]+/g) || [input];
+      // Split by sentences (Urdu/Arabic punctuation)
+      const sentences = input.match(/[^۔.!?]+[۔.!?]+/g) || [input];
       const chunks: string[] = [];
       let current = '';
       
@@ -53,84 +54,81 @@ async function translateToSindhi(text: string): Promise<string | null> {
       return chunks;
     };
 
-    // Step 1: English → Urdu (more reliable)
-    const urduChunks: string[] = [];
-    for (const chunk of splitIntoChunks(text)) {
-      try {
-        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=en|ur`;
-        const res = await fetch(url, { cache: "no-store" });
-        
-        if (res.ok) {
-          const data = await res.json();
-          const urdu = data?.responseData?.translatedText || "";
-          if (urdu) urduChunks.push(urdu);
-        }
-        
-        // Rate limiting
-        await new Promise(resolve => setTimeout(resolve, 100));
-      } catch {
-        urduChunks.push(chunk); // Fallback to original
-      }
-    }
-    
-    if (urduChunks.length === 0) return null;
-    const urduText = urduChunks.join(" ");
-
-    // Step 2: Urdu → Sindhi (better quality)
     const sindhiChunks: string[] = [];
+    
     for (const chunk of splitIntoChunks(urduText)) {
       try {
-        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=ur|sd`;
-        const res = await fetch(url, { cache: "no-store" });
+        // Try Google Translate first (better for Urdu→Sindhi)
+        const googleUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=ur&tl=sd&dt=t&q=${encodeURIComponent(chunk)}`;
+        const googleRes = await fetch(googleUrl, { cache: "no-store" });
         
-        if (res.ok) {
-          const data = await res.json();
-          const sindhi = data?.responseData?.translatedText || "";
-          if (sindhi) sindhiChunks.push(sanitizeSindhiText(sindhi));
+        if (googleRes.ok) {
+          const data = await googleRes.json();
+          if (Array.isArray(data) && Array.isArray(data[0])) {
+            const translated = data[0].map((item: string[]) => item[0]).join('');
+            if (translated) {
+              sindhiChunks.push(sanitizeSindhiText(translated));
+              await new Promise(resolve => setTimeout(resolve, 100));
+              continue;
+            }
+          }
+        }
+        
+        // Fallback to MyMemory
+        const myMemoryUrl = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=ur|sd`;
+        const mmRes = await fetch(myMemoryUrl, { cache: "no-store" });
+        
+        if (mmRes.ok) {
+          const data = await mmRes.json();
+          const translated = data?.responseData?.translatedText || "";
+          if (translated) {
+            sindhiChunks.push(sanitizeSindhiText(translated));
+          }
         }
         
         await new Promise(resolve => setTimeout(resolve, 100));
-      } catch {
-        // Skip failed chunks
+      } catch (err) {
+        console.error("Chunk translation error:", err);
+        // Continue with other chunks
       }
     }
 
     return sindhiChunks.join(" ").trim() || null;
   } catch (err) {
-    console.error("Translation error:", err);
+    console.error("Urdu to Sindhi translation error:", err);
     return null;
   }
 }
 
 
 
-// Fetch from Sunnah.com API - verified source
-async function fetchFromSunnahAPI(collection: string, number: string): Promise<{
+// Fetch from ahadith.co.uk API - comprehensive hadith database
+async function fetchFromAhadithAPI(collection: string, number: string): Promise<{
   arabic: string | null;
-  english: string | null;
+  urdu: string | null;
 } | null> {
   try {
     const collectionName = COLLECTION_MAP[collection.toLowerCase()] || collection;
-    const url = `https://api.sunnah.com/v1/hadiths/${collectionName}/${number}`;
+    const url = `${HADITH_API_BASE}/${collectionName}/${number}?lang=ara,urd`;
     
-    const res = await fetch(url, {
-      headers: { 'X-API-Key': SUNNAH_API_KEY },
-      cache: 'no-store'
-    });
+    const res = await fetch(url, { cache: 'no-store' });
 
     if (res.ok) {
       const data = await res.json();
-      const hadith = data?.hadith;
+      const hadith = data?.data;
       
       if (hadith) {
-        return {
-          arabic: hadith?.hadithArabic || hadith?.body || null,
-          english: hadith?.hadithEnglish || hadith?.englishText || null
-        };
+        // Get Arabic text
+        const arabic = hadith?.hadith_arabic || hadith?.text_arabic || null;
+        
+        // Get Urdu text (we'll translate this to Sindhi)
+        const urdu = hadith?.hadith_urdu || hadith?.text_urdu || null;
+        
+        return { arabic, urdu };
       }
     }
   } catch (err) {
-    console.error("Sunnah.com API error:", err);
+    console.error("Ahadith API error:", err);
   }
   
   return null;
@@ -139,7 +137,7 @@ async function fetchFromSunnahAPI(collection: string, number: string): Promise<{
 // Fallback to hadith.gading.dev
 async function fetchFromGadingAPI(collection: string, number: string): Promise<{
   arabic: string | null;
-  english: string | null;
+  urdu: string | null;
 } | null> {
   try {
     const res = await fetch(`https://api.hadith.gading.dev/books/${collection}/${number}`, {
@@ -152,35 +150,11 @@ async function fetchFromGadingAPI(collection: string, number: string): Promise<{
       
       return {
         arabic: contents?.arab || null,
-        english: contents?.id || null
+        urdu: null // Gading doesn't have Urdu
       };
     }
   } catch (err) {
     console.error("Gading API error:", err);
-  }
-  
-  return null;
-}
-
-// Check local Sindhi translations
-async function getLocalSindhi(collection: string, number: string, req: NextRequest): Promise<string | null> {
-  try {
-    const url = new URL(req.url);
-    const base = `${url.protocol}//${url.host}`;
-    const localJsonUrl = `${base}/hadith/sindhi/${collection}.json`;
-    
-    const localRes = await fetch(localJsonUrl);
-    if (localRes.ok) {
-      const localData = await localRes.json();
-      const items: Array<{ hadithnumber: string; text: string }> = localData?.hadiths || [];
-      const matched = items.find((h) => String(h.hadithnumber) === String(number));
-      
-      if (matched?.text) {
-        return matched.text;
-      }
-    }
-  } catch {
-    // Ignore
   }
   
   return null;
@@ -193,19 +167,15 @@ export async function GET(
   try {
     const { collection, number } = params;
     
-    // 1. Try local Sindhi first (most accurate)
-    let sindhiText = await getLocalSindhi(collection, number, req);
-    let source: 'local' | 'sunnah.com' | 'machine:en-sd' | 'gading.dev' = 'local';
+    let source: 'ahadith.co.uk' | 'gading.dev' | 'translated' = 'ahadith.co.uk';
     
-    // 2. Fetch from Sunnah.com (verified source)
-    let hadithData = await fetchFromSunnahAPI(collection, number);
+    // 1. Fetch from ahadith.co.uk (has Arabic + Urdu)
+    let hadithData = await fetchFromAhadithAPI(collection, number);
     
-    // 3. Fallback to gading.dev
+    // 2. Fallback to gading.dev (Arabic only)
     if (!hadithData?.arabic) {
       hadithData = await fetchFromGadingAPI(collection, number);
-      if (hadithData) source = 'gading.dev';
-    } else if (!sindhiText) {
-      source = 'sunnah.com';
+      source = 'gading.dev';
     }
     
     if (!hadithData) {
@@ -215,10 +185,13 @@ export async function GET(
       );
     }
 
-    // 4. Generate Sindhi if not available locally
-    if (!sindhiText && hadithData.english) {
-      sindhiText = await translateToSindhi(hadithData.english);
-      source = 'machine:en-sd';
+    // 3. Translate Urdu to Sindhi (if we have Urdu)
+    let sindhiText: string | null = null;
+    
+    if (hadithData.urdu) {
+      // Direct Urdu → Sindhi translation (better quality)
+      sindhiText = await translateUrduToSindhi(hadithData.urdu);
+      source = 'translated';
     }
 
     return NextResponse.json(
@@ -226,17 +199,14 @@ export async function GET(
         collection,
         number,
         arabic: hadithData.arabic,
-        english: hadithData.english,
         sindhi: sindhiText || null,
         meta: { 
           source,
-          note: source === 'local' 
-            ? 'مقامي تصديق ٿيل ترجمو' 
-            : source === 'sunnah.com'
-            ? 'Verified from Sunnah.com'
-            : source === 'machine:en-sd'
-            ? 'انگريزي مان مشيني ترجمو'
-            : 'Machine translation'
+          note: source === 'ahadith.co.uk'
+            ? 'تصديق ٿيل ذريعو'
+            : source === 'translated'
+            ? 'اردو مان ترجمو'
+            : 'عربي متن'
         },
       },
       { headers: { "Cache-Control": "public, max-age=86400" } }
