@@ -1,10 +1,24 @@
 // app/api/hadith/[collection]/[number]/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
-// Hadith API - ahadith.co.uk has comprehensive hadith database
+// Hadith APIs
 const HADITH_API_BASE = "https://ahadith.co.uk/api";
+const HADITHAPI_BASE = "https://hadithapi.com/api"; // Has multiple language support
+const SUNNAH_API = "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions"; // Multi-language hadith API
 
-// Collection name mapping
+// Collection name mapping for hadithapi.com
+const HADITHAPI_MAP: Record<string, string> = {
+  'bukhari': 'sahih-bukhari',
+  'muslim': 'sahih-muslim',
+  'tirmidhi': 'jami-at-tirmidhi',
+  'abudawud': 'sunan-abi-dawud',
+  'nasai': 'sunan-an-nasai',
+  'ibnmajah': 'sunan-ibn-majah',
+  'malik': 'muwatta-malik',
+  'ahmad': 'musnad-ahmad'
+};
+
+// Collection name mapping for ahadith.co.uk
 const COLLECTION_MAP: Record<string, string> = {
   'bukhari': 'bukhari',
   'muslim': 'muslim',
@@ -102,6 +116,89 @@ async function translateUrduToSindhi(urduText: string): Promise<string | null> {
 
 
 
+// Try fawazahmed0/hadith-api - comprehensive multi-language support
+async function fetchFromFawazHadithAPI(collection: string, number: string): Promise<{
+  arabic: string | null;
+  sindhi: string | null;
+  urdu: string | null;
+} | null> {
+  try {
+    const collectionName = collection.toLowerCase();
+    
+    // Try Sindhi editions
+    const sindhiEditions = ['sin-sindhi', 'snd-sindhi', 'sd-sindhi'];
+    let sindhiText: string | null = null;
+    
+    for (const edition of sindhiEditions) {
+      try {
+        const url = `${SUNNAH_API}/${edition}/${collectionName}.json`;
+        const res = await fetch(url, { cache: 'no-store' });
+        
+        if (res.ok) {
+          const data = await res.json();
+          const hadiths = data?.hadiths;
+          
+          if (Array.isArray(hadiths)) {
+            const hadith = hadiths.find((h: any) => h?.hadithnumber === parseInt(number));
+            if (hadith?.text) {
+              sindhiText = hadith.text;
+              break;
+            }
+          }
+        }
+      } catch {
+        continue;
+      }
+    }
+    
+    // Get Arabic
+    let arabicText: string | null = null;
+    try {
+      const arabicUrl = `${SUNNAH_API}/ara-saudarab/${collectionName}.json`;
+      const arabicRes = await fetch(arabicUrl, { cache: 'no-store' });
+      
+      if (arabicRes.ok) {
+        const data = await arabicRes.json();
+        const hadiths = data?.hadiths;
+        
+        if (Array.isArray(hadiths)) {
+          const hadith = hadiths.find((h: any) => h?.hadithnumber === parseInt(number));
+          if (hadith?.text) {
+            arabicText = hadith.text;
+          }
+        }
+      }
+    } catch {}
+    
+    // Get Urdu
+    let urduText: string | null = null;
+    try {
+      const urduUrl = `${SUNNAH_API}/urd-hadeesurdu/${collectionName}.json`;
+      const urduRes = await fetch(urduUrl, { cache: 'no-store' });
+      
+      if (urduRes.ok) {
+        const data = await urduRes.json();
+        const hadiths = data?.hadiths;
+        
+        if (Array.isArray(hadiths)) {
+          const hadith = hadiths.find((h: any) => h?.hadithnumber === parseInt(number));
+          if (hadith?.text) {
+            urduText = hadith.text;
+          }
+        }
+      }
+    } catch {}
+    
+    if (arabicText || sindhiText || urduText) {
+      return { arabic: arabicText, sindhi: sindhiText, urdu: urduText };
+    }
+  } catch (err) {
+    console.error("Fawaz Hadith API error:", err);
+  }
+  
+  return null;
+}
+
 // Fetch from ahadith.co.uk API - comprehensive hadith database
 async function fetchFromAhadithAPI(collection: string, number: string): Promise<{
   arabic: string | null;
@@ -167,42 +264,66 @@ export async function GET(
   try {
     const { collection, number } = params;
     
-    let source: 'ahadith.co.uk' | 'gading.dev' | 'translated' = 'ahadith.co.uk';
+    let source: 'direct-sindhi' | 'ahadith.co.uk' | 'gading.dev' | 'translated' = 'ahadith.co.uk';
+    let sindhiText: string | null = null;
+    let arabicText: string | null = null;
     
-    // 1. Fetch from ahadith.co.uk (has Arabic + Urdu)
-    let hadithData = await fetchFromAhadithAPI(collection, number);
-    
-    // 2. Fallback to gading.dev (Arabic only)
-    if (!hadithData?.arabic) {
-      hadithData = await fetchFromGadingAPI(collection, number);
-      source = 'gading.dev';
+    // 1. Try fawazahmed0/hadith-api first (has direct Sindhi translations!)
+    const fawazData = await fetchFromFawazHadithAPI(collection, number);
+    if (fawazData) {
+      if (fawazData.arabic) arabicText = fawazData.arabic;
+      
+      // Check if we got direct Sindhi translation
+      if (fawazData.sindhi) {
+        sindhiText = fawazData.sindhi;
+        source = 'direct-sindhi';
+      } else if (fawazData.urdu) {
+        // Translate from Urdu if no Sindhi
+        sindhiText = await translateUrduToSindhi(fawazData.urdu);
+        source = 'translated';
+      }
     }
     
-    if (!hadithData) {
+    // 2. Fallback to ahadith.co.uk (has Arabic + Urdu)
+    if (!arabicText) {
+      const ahadithData = await fetchFromAhadithAPI(collection, number);
+      if (ahadithData) {
+        arabicText = ahadithData.arabic;
+        
+        if (ahadithData.urdu && !sindhiText) {
+          sindhiText = await translateUrduToSindhi(ahadithData.urdu);
+          source = 'translated';
+        }
+      }
+    }
+    
+    // 3. Final fallback to gading.dev (Arabic only)
+    if (!arabicText) {
+      const gadingData = await fetchFromGadingAPI(collection, number);
+      if (gadingData?.arabic) {
+        arabicText = gadingData.arabic;
+        source = 'gading.dev';
+      }
+    }
+    
+    if (!arabicText) {
       return NextResponse.json(
         { error: "Hadith not found" },
         { status: 404 }
       );
     }
 
-    // 3. Translate Urdu to Sindhi (if we have Urdu)
-    let sindhiText: string | null = null;
-    
-    if (hadithData.urdu) {
-      // Direct Urdu → Sindhi translation (better quality)
-      sindhiText = await translateUrduToSindhi(hadithData.urdu);
-      source = 'translated';
-    }
-
     return NextResponse.json(
       {
         collection,
         number,
-        arabic: hadithData.arabic,
+        arabic: arabicText,
         sindhi: sindhiText || null,
         meta: { 
           source,
-          note: source === 'ahadith.co.uk'
+          note: source === 'direct-sindhi'
+            ? 'سڌي سنڌي ترجمو - تصديق ٿيل'
+            : source === 'ahadith.co.uk'
             ? 'تصديق ٿيل ذريعو'
             : source === 'translated'
             ? 'اردو مان ترجمو'
